@@ -149,7 +149,7 @@ async function sendWecomMessage(config, content) {
   );
 
   if (withinWindow.length === 0) {
-    console.log('未来通知范围内没有生日。');
+    console.log(`未来${notifyDays}天内没有生日纪念日。`);
     return;
   }
 
