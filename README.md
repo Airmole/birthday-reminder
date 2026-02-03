@@ -162,11 +162,11 @@ master:
 
 > 说明：`.cnb.yml` 里包含 `imports` 引用私有仓库配置读取企业微信消息通知KEY，fork 后请修改为自己的秘钥仓库配置文件链接。
 
-![](https://r2.airmole.cn/i/2026/02/03/1152bi-68.png)
+<img width="977" alt="image.png" src="/-/imgs/m0ppeSpOdykQTIDeqyOZpM/11b983c1-c321-4358-a887-c7e1875066ee.png" class="cnb-md-image__upload" />
 
 ## 企业微信群机器人创建及KEY获取
 
-![](https://r2.airmole.cn/i/2026/02/03/118uj0-34.png)
+<img width="1617" alt="image.png" src="/-/imgs/m0ppeSpOdykQTIDeqyOZpM/33ff91ff-64ee-4a6d-8a9e-b5273af856df.png" class="cnb-md-image__upload" />
 
 `WEBHOOK_KEY` 值只需要填写Webhook地址中send?key=之后的部分。
 
