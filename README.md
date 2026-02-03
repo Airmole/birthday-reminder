@@ -164,6 +164,12 @@ master:
 
 ![](https://r2.airmole.cn/i/2026/02/03/1152bi-68.png)
 
+## 企业微信群机器人创建及KEY获取
+
+![](https://r2.airmole.cn/i/2026/02/03/118uj0-34.png)
+
+`WEBHOOK_KEY` 值只需要填写Webhook地址中send?key=之后的部分。
+
 ## 说明
 
 - 农历转换依赖 `solarlunar` 库
