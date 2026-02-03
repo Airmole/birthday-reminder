@@ -1,0 +1,9 @@
+master:
+  "crontab: 0 6 * * *":
+    - docker:
+        image: node:22
+      stages:
+        - name: 安装依赖
+          script: npm install
+        - name: 运行
+          script: node ./index.js
