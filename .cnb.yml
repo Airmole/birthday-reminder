@@ -2,6 +2,7 @@ master:
   "crontab: 0 6 * * *":
     - docker:
         image: node:22
+      # 引入您自己的秘钥仓库，以读取 $WEBHOOK_KEY 配置参数值
       imports:
         - https://cnb.cool/Airmole/Airmole-Secret-Repos/-/blob/main/work-wechat.yml
       env:
@@ -13,6 +14,7 @@ master:
   push:
     - docker:
         image: node:22
+      # 引入您自己的秘钥仓库，以读取 $WEBHOOK_KEY 配置参数值
       imports:
         - https://cnb.cool/Airmole/Airmole-Secret-Repos/-/blob/main/work-wechat.yml
       env:

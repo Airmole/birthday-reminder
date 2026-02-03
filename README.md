@@ -61,19 +61,22 @@
 ```json
 [
   {
-    "name": "张三",
-    "birthday": "1990-05-12",
-    "calendar": "solar"
+    "name": "袁丹杰",
+    "birthday": "01-01",
+    "calendar": "solar",
+    "note": "元旦节"
   },
   {
-    "name": "李四",
-    "birthday": "06-18",
-    "calendar": "solar"
+    "name": "郭春洁",
+    "birthday": "01-01",
+    "calendar": "lunar",
+    "note": "春节"
   },
   {
-    "name": "王五",
-    "birthday": "03-05",
-    "calendar": "lunar"
+    "name": "袁骁介",
+    "birthday": "01-15",
+    "calendar": "lunar",
+    "note": "元宵节"
   }
 ]
 ```
@@ -120,7 +123,46 @@ node index.js
 
 创建仓库 Secret：`WEBHOOK_KEY`，值为机器人 key 或完整 webhook URL。
 
-工作流已放在 `.github/workflows/birthday-reminder.yml`，默认每天 **UTC 01:00** 执行一次（北京时间 09:00）。\n如果需要修改时间，请编辑 `cron` 表达式。
+工作流已放在 `.github/workflows/birthday-reminder.yml`，默认每天 **UTC 01:00** 执行一次（北京时间 09:00）。
+如果需要修改时间，请编辑 `cron` 表达式。
+
+## CNB 云原生构建
+
+项目已提供 `.cnb.yml`，用于在 CNB 平台上按计划执行提醒任务。当前配置包含两种触发方式：
+
+- 定时任务：`crontab: 0 6 * * *`（Asia/Shanghai 06:00）
+- 推送触发：`push` 时执行一次
+
+### 使用方式（fork 后配置）
+
+1. Fork 本项目到你的 CNB 账号下。
+2. 在 CNB 创建[密钥仓库](https://docs.cnb.cool/zh/repo/secret.html)并配置 `WEBHOOK_KEY`（企业微信机器人key）。
+3. 按需修改 `.cnb.yml` 中的构建指令或触发规则：
+
+```yaml
+master:
+  "crontab: 0 6 * * *":
+    - docker:
+        image: node:22
+      # 引入您自己的秘钥仓库，以读取 $WEBHOOK_KEY 配置参数值
+      imports:
+        - https://cnb.cool/Airmole/Airmole-Secret-Repos/-/blob/main/work-wechat.yml
+      env:
+        WEBHOOK_KEY: $WEBHOOK_KEY
+      stages:
+        - npm install
+        - node ./index.js
+```
+
+### 常见调整点
+
+- 定时任务时间：修改 `crontab` 表达式（GithubActions使用UTC时间，CNB使用北京时间）。
+- Node 版本：修改 `docker.image`（如 `node:22`）。
+- 执行命令：修改 `stages` 中的命令顺序或脚本。
+
+> 说明：`.cnb.yml` 里包含 `imports` 引用私有仓库配置读取企业微信消息通知KEY，fork 后请修改为自己的秘钥仓库配置文件链接。
+
+![](https://r2.airmole.cn/i/2026/02/03/1152bi-68.png)
 
 ## 说明
 
