@@ -7,7 +7,16 @@ master:
       env:
         WEBHOOK_KEY: $WEBHOOK_KEY
       stages:
-        - name: 安装依赖
-          script: npm install
-        - name: 运行
-          script: node ./index.js
+        - npm install
+        - node ./index.js
+
+  push:
+    - docker:
+        image: node:22
+      imports:
+        - https://cnb.cool/Airmole/Airmole-Secret-Repos/-/blob/main/work-wechat.yml
+      env:
+        WEBHOOK_KEY: $WEBHOOK_KEY
+      stages:
+        - npm install
+        - node ./index.js

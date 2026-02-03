@@ -16,10 +16,11 @@ function startOfDay(date) {
 }
 
 function formatDate(date) {
-  const yyyy = date.getFullYear();
+  // const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, '0');
   const dd = String(date.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
+  // return `${yyyy}-${mm}-${dd}`;
+  return `${mm}-${dd}`;
 }
 
 function nextSolarDate(month, day, today) {
@@ -152,10 +153,10 @@ async function sendWecomMessage(config, content) {
     return;
   }
 
-  const header = `生日提醒（未来 ${notifyDays} 天）`;
+  const header = `生日提醒(未来${notifyDays}天):`;
   const lines = withinWindow.map((item) => {
     const typeLabel = item.calendar === 'lunar' ? '农历' : '公历';
-    return `${item.name}：${formatDate(item.nextDate)}（${typeLabel} ${item.sourceDate}，剩余${item.daysUntil}天）`;
+    return `${item.name}：${formatDate(item.nextDate)}(${typeLabel}${item.sourceDate}，${item.daysUntil}天后)`;
   });
 
   const content = [header, ...lines].join('\n');
